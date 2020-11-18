@@ -7,6 +7,9 @@ package pracHDVELH;
 
 import myUtils.ErrorNaiveHandler;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * @author prost
  *
@@ -16,13 +19,14 @@ public class NodeMultiple {
 	public static final String ERROR_MSG_INDEX_OUT_OF_RANGE = "Index out of range";
 	public static int NODE_MAX_ARITY = 10;
 
-	private NodeMultiple[] daughters;
+	private ArrayList<NodeMultiple> daughters = new ArrayList<NodeMultiple>();
 	private Object data;
 
 	/* Overridden methods */
 	@Override
 	public String toString() {
-		return "";
+
+		return data.toString();
 	}
 
 	/* Getters/Setters */
@@ -36,7 +40,7 @@ public class NodeMultiple {
 	 * @return the {@code i}th daughter node, or {@code null} if it does not exist.
 	 */
 	public NodeMultiple getDaughter(int i) {
-		return this.daughters[i];
+		return this.daughters.get(i);
 	}
 
 	/**
@@ -54,13 +58,13 @@ public class NodeMultiple {
 	 * @param i        the daughter node's index
 	 */
 	public void setDaughter(NodeMultiple daughter, int i) {
-		this.daughters[i] = daughter;
+		this.daughters.add(i, daughter);
 	}
 
 	/**
 	 * @return all the daughters
 	 */
-	public NodeMultiple[] getDaughters() {
+	public ArrayList<NodeMultiple> getDaughters() {
 		return this.daughters;
 	}
 
@@ -68,7 +72,7 @@ public class NodeMultiple {
 	 * @param daughters the daughters to set
 	 */
 	public void setDaughters(NodeMultiple[] daughters) {
-		this.daughters = daughters;
+		Collections.addAll(this.daughters, daughters);
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class NodeMultiple {
 	 * @param daughter
 	 */
 	public void addDaughter(NodeMultiple daughter) {
-		this.daughters[this.daughters.length] = daughter;
+		this.daughters.add(daughter);
 	}
 
 	/**
@@ -102,7 +106,11 @@ public class NodeMultiple {
 	 * daughter node.
 	 */
 	public boolean hasDaughters() {
-		return (this.daughters.length > 0);
+		if (this.daughters.isEmpty()) return false;
+		for (NodeMultiple node : this.daughters) {
+			if (node == null) return false;
+		}
+		return true;
 	}
 
 	/* Constructors */

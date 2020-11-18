@@ -16,6 +16,19 @@ public class Scenario {
 	private GUIManager gui;
 
 	/* TO BE COMPLETED */
+	public Scenario(GUIManager gui , Event startEvent) {
+		this.gui = gui;
+		head = startEvent;
+	}
+	public String run() {
+		while(head.hasDaughters()) {
+			gui.output(head.getData());
+			int next = head.getReader().nextInt()-1;
+			head = head.getDaughter(next);
+		}
+		return MSG_FINALE;
+	}
+
 
 	/* MAIN */
 	public static void main(String[] args) {

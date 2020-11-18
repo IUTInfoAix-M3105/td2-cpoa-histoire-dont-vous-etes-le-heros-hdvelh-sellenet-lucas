@@ -20,6 +20,8 @@ public class Event extends NodeMultiple {
 
 	private String playerAnwser;
 	private Scanner reader;
+	private int ChosenPath;
+	private GUIManager gui;
 	/**
 	 * @return the playerAnswer
 	 */
@@ -52,14 +54,14 @@ public class Event extends NodeMultiple {
 	 * @return the chosenPath
 	 */
 	public int getChosenPath() {
-		/* TO BE COMPLETED */
+		return ChosenPath;
 	}
 
 	/**
 	 * @param chosenPath the chosenPath to set
 	 */
 	public void setChosenPath(int chosenPath) {
-		/* TO BE COMPLETED */
+		ChosenPath = chosenPath;
 	}
 
 	/* Methods */
@@ -67,7 +69,7 @@ public class Event extends NodeMultiple {
 	 * @see pracHDVELH.NodeMultiple#getData()
 	 */
 	public String getData() {
-		/* TO BE COMPLETED */
+		return super.getData().toString();
 	}
 
 	/**
@@ -75,7 +77,7 @@ public class Event extends NodeMultiple {
 	 * @param data
 	 */
 	public void setData(String data) {
-		/* TO BE COMPLETED */
+		super.setData(data);
 	}
 
 	/**
@@ -83,7 +85,7 @@ public class Event extends NodeMultiple {
 	 */
 	@Override
 	public Event getDaughter(int i) {
-		/* TO BE COMPLETED */
+		return (Event)super.getDaughter(i);
 	}
 
 	/**
@@ -92,32 +94,36 @@ public class Event extends NodeMultiple {
 	 * @param i
 	 */
 	public void setDaughter(Event daughter, int i) {
-		/* TO BE COMPLETED */
+		super.setDaughter(daughter, i);
 	}
 
 	/**
 	 * @return the gui
 	 */
 	public GUIManager getGui() {
-		/* TO BE COMPLETED */
+		return gui;
 	}
 
 	/**
 	 * @param gui the gui to set
 	 */
 	public void setGui(GUIManager gui) {
-		/* TO BE COMPLETED */
+		this.gui = gui;
+		setReader(gui.getInputReader());
 	}
 
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		/* TO BE COMPLETED */
+		return 0;
 	}
 
 	/* Methods */
 	/* TO BE COMPLETED */
+	public Event(GUIManager gui, String text) {
+		setGui(gui);
+		setData(text);
 	}
 }
 

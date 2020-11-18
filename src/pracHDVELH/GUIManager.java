@@ -21,7 +21,7 @@ public class GUIManager {
    * @param s
    */
   public void outputln(String s) {
-	out.println(s);
+      out.println(s);
   }
 
   /**
@@ -44,14 +44,14 @@ public class GUIManager {
    * @return
    */
   public Scanner getInputReader() {
-	return inputReader;
+      return inputReader;
   }
 
   /**
    * Constructor. Sets the GUI to the default system IOs.
    */
   public GUIManager() {
-	this(System.in, System.out, System.err);
+      this(System.in, System.out, System.err);
   }
 
   /**
