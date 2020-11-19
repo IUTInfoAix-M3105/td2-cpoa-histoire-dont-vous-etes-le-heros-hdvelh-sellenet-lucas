@@ -1,17 +1,37 @@
 package pracHDVELH;
 
 public class EventExactSolution extends Event {
-    private String AnwserExpected;
+    private String AnswerExpected;
 
     public String getAnwserExpected() {
-        return AnwserExpected;
+        return AnswerExpected;
     }
     public void setAnwserExpected(String anwserExpected) {
-        AnwserExpected = anwserExpected;
+        AnswerExpected = anwserExpected;
     }
 
-    EventExactSolution(GUIManager gui, String data, String anwser) {
+    private int interpretAnswer() {
+        if (getAnwserExpected().equals(getPlayerAnswer().toString())) {
+            return 0;
+        }
+        return -1;
+    }
+
+    @Override
+    public Event run() {
+        getGui().outputln(this.toString());
+        getGui().output(PROMPT_ANSWER);
+        setPlayerAnswer(getReader().next());
+        int path = interpretAnswer();
+        while (path == -1) {
+            return run();
+        }
+        setChosenPath(path);
+        return getDaughter(getChosenPath());
+    }
+
+    EventExactSolution(GUIManager gui, String data, String answer) {
         super(gui, data);
-        setAnwserExpected(anwser);
+        setAnwserExpected(answer);
     }
 }

@@ -22,6 +22,9 @@ public class Event extends NodeMultiple {
 	private Scanner reader;
 	private int ChosenPath;
 	private GUIManager gui;
+	private int id;
+
+	private static int nodeIdIncr = -1;
 	/**
 	 * @return the playerAnswer
 	 */
@@ -116,7 +119,7 @@ public class Event extends NodeMultiple {
 	 * @return the id
 	 */
 	public int getId() {
-		return 0;
+		return this.id;
 	}
 
 	/* Methods */
@@ -124,6 +127,29 @@ public class Event extends NodeMultiple {
 	public Event(GUIManager gui, String text) {
 		setGui(gui);
 		setData(text);
+		this.id = ++nodeIdIncr;
+	}
+
+	private int interpretAnswer() {
+		String playerAnwser = getPlayerAnswer();
+		int path = Integer.parseInt(playerAnwser)-1;
+		if (getDaughters().size()-1 > path) {
+			getGui().outputln(WARNING_MSG_INTEGER_EXPECTED);
+			run();
+		}
+		return path;
+	}
+
+	public Event run() {
+		getGui().outputln(this.toString());
+		getGui().output(PROMPT_ANSWER);
+		setPlayerAnswer(getReader().next());
+		int path = interpretAnswer();
+		while (path == -1) {
+			return run();
+		}
+		setChosenPath(path);
+		return getDaughter(getChosenPath());
 	}
 }
 

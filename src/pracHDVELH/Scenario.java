@@ -21,10 +21,8 @@ public class Scenario {
 		head = startEvent;
 	}
 	public String run() {
-		while(head.hasDaughters()) {
-			gui.output(head.getData());
-			int next = head.getReader().nextInt()-1;
-			head = head.getDaughter(next);
+		while (head.hasDaughters()) {
+			head = head.run();
 		}
 		return MSG_FINALE;
 	}
